@@ -1,0 +1,35 @@
+name: Build and Deploy Node App Locally
+
+on:
+  push:
+    branches:
+      - master
+      - branch1
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout latest code
+        uses: actions/checkout@v4
+
+      - name: Show current directory
+        run: |
+          pwd
+          ls -la
+
+      - name: Check Docker version
+        run: |
+          docker --version
+          docker compose version
+
+      - name: Build and deploy using Docker Compose
+        run: |
+          docker compose up -d --build --remove-orphans
+
+      - name: Show running containers
+        run: |
+          docker ps
+          docker compose ps
