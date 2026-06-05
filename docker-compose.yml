@@ -1,9 +1,10 @@
 services:
   app:
-    build: 
+    image: nodejs-app:latest
+    container_name: nodejs-app-container
+    build:
       context: .
       dockerfile: Dockerfile
     restart: unless-stopped
     ports:
-      - 7000:7000
-      
+      - "7000:7000"
